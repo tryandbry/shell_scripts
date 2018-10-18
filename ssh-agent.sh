@@ -1,10 +1,13 @@
 #!/bin/bash
 
+SOCKET_DIR=$HOME/.ssh_sock
 SOCKET_FILE=$HOME/.ssh_sock/ssh-agent-socket
+if [[ ! -e $SOCKET_DIR ]]; then
+  mkdir -p $SOCKET_DIR
+fi
 
 function start_ssh_agent {
   eval `ssh-agent -s -a $SOCKET_FILE`;
-  ssh-add;
 }
 
 function cleanup {
